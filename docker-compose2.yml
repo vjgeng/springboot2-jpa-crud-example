@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+ server: 
+  build: .
+  restart: always
+  ports: 
+   - 8080:8080
+  depends_on: 
+   - docker-example
+ docker-example: 
+  image: "postgres:13.1-alpine"
+  restart: always
+  ports: 
+   - 5444:5432
+  environment:
+   - POSTGRES_USER=postgres
+   - POSTGRES_PASSWORD=postgres
+ 

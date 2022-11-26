@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+ server:
+  build: .
+  restart: always
+  ports:
+   - 8080:8080
+  depends_on:
+   - docker-example
+ docker-example:
+  image: "mysql:5.7"
+  restart: always
+  ports:
+   - 3308:3306
+ deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+  environment:
+   MYSQL_DATABASE: users_database
+   MYSQL_USER: scbushan05
+   MYSQL_PASSWORD: scbushan05
+   MYSQL_ROOT_PASSWORD: scbushan05
